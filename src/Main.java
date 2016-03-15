@@ -18,7 +18,7 @@ public class Main {
 
 
         DoctorDetails[] dd = new DoctorDetails[3];
-        dd[0] = new DoctorDetails("s","s","s");
+        dd[0] = new DoctorDetails("Test doctor number 1","surname","dep");
         dd[1] = new DoctorDetails("s","s","s");
         dd[2] = new DoctorDetails("s","s","s");
 

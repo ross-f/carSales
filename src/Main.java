@@ -1,21 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.util.Scanner;
 
-/**
- *
- * @author Ross
- */
 public class Main {
-
     /**
-     * @param args the command line arguments
+     * Welcome msg
+     * show menu
+     * ask for input
+     * switch input
+     *  case 1:
+     *    cars
+     *  case 2:
+     *    employees
+     *  case 3;
+     *    customers
      */
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
 
         DoctorDetails[] dd = new DoctorDetails[3];
         dd[0] = new DoctorDetails("Test doctor number 1","surname","dep");

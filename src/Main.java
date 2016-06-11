@@ -16,7 +16,20 @@ public class Main {
      */
 
     public static void main(String[] args) {
-        List<Employee> employees = new ArrayList<Employee>(2);
+        List<Employee> employees = new ArrayList<>();
+
+        employees.add(new Employee("User","Name","Sales",1,10000.00));
+        employees.add(new Employee("Admin","Account","Admin",1,10000.00,true));
+
+        Menu gooey = new Menu(
+                "Car Sales",
+                new String[]{
+                        "Button 1",
+                        "button 2",
+                        "Button 3",
+                        "Button 4"
+                }
+        );
 
         Car[] cars = new Car[3];
     }

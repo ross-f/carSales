@@ -1,83 +1,62 @@
 import javax.swing.*;
 import java.awt.*;
 
-class Menu extends JFrame {
-    private JPanel mainPanel;
-    private JPanel menuButtonPanel;
+class Menu {
+    private String title;
+    private JFrame mainFrame;
     private String[] pageNames;
 
     // Constructs the components for the menu
     // Pass through the page names to make it more dynamic
     Menu(String title, String[] pageNames) {
-        // Construct the main JFrame with the title
-        super(title);
-        // TODO - Make sizes variable
-        setSize(500,500);
-        // Create a grid layout for the title and the content
-        // Kill the app when the user closes it
-        setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-
-        // Create a menuButtonPanel to hold everything because box layout requires an object to target
-        mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
-
-        /*
-            The menu buttons will be created in a grid inside a
-            JPanel, the following statements defines layout of that
-            grid.
-
-            The number of rows in that menuButtonPanel is half the number of
-            buttons as there is two columns.
-
-            The number of rows will be rounded up if there is an odd
-            number of rows
-        */
-        add(new JSeparator());
-        // crate menuButtonPanel
-        menuButtonPanel = new JPanel();
-        // calculate the number of rows in grid layout
-        double a = (double) pageNames.length / 2;
-        int numberOfRows = (int) Math.round(a);
-
-        // set the layout of the menuButtonPanel to the new layout
-        menuButtonPanel.setLayout(new GridLayout(numberOfRows, 2, 10, 20));
-
-        // Add the page names to the object so they can be used by createPageButtons
+        // Construct the object
+        this.title = title;
         this.pageNames = pageNames;
 
-        createPageButtons();
+        // Create the base elements of the GUI: JFrame and panel
+        createBaseGui();
 
-        // Header label is created based on the title passed through
-        JLabel header = new JLabel(title,JLabel.CENTER);
-
-        // Set size of header to push menuButtonPanel down
-        header.setPreferredSize(new Dimension(10,100));
-
-        // Add the header to the outer JFrame
-        add(header, BorderLayout.PAGE_START);
-
-        add(new JSeparator());
-        add(new JSeparator());
-
-        // Add the menuButtonPanel (now with menu buttons) to the JFrame
-        add(menuButtonPanel, BorderLayout.CENTER);
-
-        add(new JSeparator());
+        // Loop though each of the page names and add a button for each
+        addComponents(mainFrame.getContentPane());
 
         // Finally make the menu visible
-        setVisible(true);
+        // mainFrame.pack();
+        mainFrame.setVisible(true);
+    }
+
+    private void createBaseGui(){
+        // Give the app the tile that's in the object
+        mainFrame = new JFrame(title);
+        // Set the size of the app
+        mainFrame.setSize(500,500);
+        // Kill the app when the user closes it
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    private void addAButton(String text, float alignment, Container pane){
+        // Creates an array of the buttons so they can be added to menuButtonPanel later
+        JButton newButton = new JButton(text);
+        newButton.setAlignmentX(alignment);
+        pane.add(newButton);
     }
 
     // Creates the buttons for each page and adds them to the menuButtonPanel
-    private void createPageButtons(){
-        // Creates an array of the buttons so they can be added to menuButtonPanel later
-        JButton[] pageButtons = new JButton[pageNames.length];
+    private void addComponents(Container pane){
+        // Add a box layout to organise all the components
+        pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
+        // Header label is created based on the title passed through
+        JLabel header = new JLabel(title,JLabel.CENTER);
+        header.setAlignmentX(Component.CENTER_ALIGNMENT);
+        pane.add(header);
 
-        // Loop though the names, makes buttons for each, add them to the menuButtonPanel
         for (int i = 0; i < pageNames.length; i++) {
-            pageButtons[i] = new JButton(pageNames[i]);
-            pageButtons[i].setPreferredSize(new Dimension(10,5));
-            menuButtonPanel.add(pageButtons[i]);
+            // if the index of the button is even then place it on the left
+            if (i % 2 == 1) {
+                addAButton(pageNames[i], Component.LEFT_ALIGNMENT, pane);
+            }
+            // if the index is odd then place it on the right
+            else addAButton(pageNames[i], Component.RIGHT_ALIGNMENT, pane);
+            // this creates a 2 column layout
         }
     }
 }

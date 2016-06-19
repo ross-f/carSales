@@ -1,16 +1,18 @@
+package carSales;
+
 import java.util.Date;
 
-public class Car {
+class Car {
     private String make, reg, colour, model, bodyStyle;
     private double price;
-    private int numberOfMiles;
+    private double numberOfMiles;
     private Date manufacturingDate;
     private Date soldDate;
 
     // Constructor to allow new objects to be made quickly
     // A new car that is added to the system is never already sold so the date is set to null
-    public Car(String make, String reg, String colour, String model, String bodyStyle,
-               double price, int numberOfMiles, Date manufacturingDate) {
+    Car(String bodyStyle, String make, String model, String colour, String reg,
+               double price, double numberOfMiles, Date manufacturingDate) {
         this.make = make;
         this.reg = reg;
         this.colour = colour;
@@ -29,55 +31,55 @@ public class Car {
        - Number of miles
        - Date soldDate
     */
-    public String getMake() {
+    String getMake() {
         return make;
     }
 
-    public String getReg() {
+    String getReg() {
         return reg;
     }
 
-    public void setColour(String colour) {
+    void setColour(String colour) {
         this.colour = colour;
     }
 
-    public String getColour() {
+    String getColour() {
         return colour;
     }
 
-    public String getModel() {
+    String getModel() {
         return model;
     }
 
-    public String getBodyStyle() {
+    String getBodyStyle() {
         return bodyStyle;
     }
 
-    public void setPrice(double price) {
+    void setPrice(double price) {
         this.price = price;
     }
 
-    public double getPrice() {
+    double getPrice() {
         return price;
     }
 
-    public void setNumberOfMiles(int numberOfMiles) {
+    void setNumberOfMiles(double numberOfMiles) {
         this.numberOfMiles = numberOfMiles;
     }
 
-    public int getNumberOfMiles() {
+    double getNumberOfMiles() {
         return numberOfMiles;
     }
 
-    public Date getManufacturingDate() {
+    Date getManufacturingDate() {
         return manufacturingDate;
     }
 
-    public void setSoldDate(Date soldDate) {
+    void setSoldDate(Date soldDate) {
         this.soldDate = soldDate;
     }
 
-    public Date isSold() {
+    Date isSold() {
         return soldDate;
     }
 }

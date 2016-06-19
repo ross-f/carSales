@@ -1,3 +1,5 @@
+package carSales;
+
 class Employee {
     private String firstName, lastName, department;
     private int payrollNumber;

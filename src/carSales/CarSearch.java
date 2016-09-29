@@ -1,5 +1,6 @@
 package carSales;
 
+import javax.lang.model.type.ArrayType;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -8,7 +9,13 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-class CarSearch extends JPanel{
+class SearchQuery {
+    String searchText;
+    String carType;
+    String make;
+}
+
+class CarSearch extends GenericPanel{
     private ArrayList<Car> cars;
 
     CarSearch(ArrayList<Car> cars) {
@@ -63,5 +70,14 @@ class CarSearch extends JPanel{
         // TODO write this
 
         return null;
+    }
+
+    private ArrayList<Car> carSearchApi(SearchQuery query){
+        // TODO - wirte config here
+
+        // Grab values out of query object
+        if(!query.searchText)
+
+        cars.stream().filter()
     }
 }

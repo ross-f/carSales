@@ -5,7 +5,7 @@ import java.awt.*;
 
 import static javax.swing.Box.*;
 
-class Menu extends JPanel{
+class Menu extends GenericPanel{
     private String[] pageNames;
     JButton[] buttons;
 

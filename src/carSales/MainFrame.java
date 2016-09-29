@@ -16,7 +16,7 @@ public class MainFrame {
     private static String title;
     private static ActionListener[] listeners;
 
-    private static void updateFrame(JPanel panel){
+    private static void updateFrame(GenericPanel panel){
         frame.getContentPane().setVisible(false);
         frame.getContentPane().removeAll();
 
@@ -28,16 +28,29 @@ public class MainFrame {
         frame.add(panel);
 
         frame.getContentPane().setVisible(true);
+
+        // Add the action listeners
+        for (int i = 0; i < listeners.length; i++) panel.buttons[i].addActionListener(listeners[i]);
     }
 
-    public static void main(String[] args) throws ParseException /** Required to parse dates **/ {
+    // TODO - fix pars exception
+    public static void main(String[] args) throws ParseException /** Required to parse dates  **/ {
+        /** Begin creating example data */
+
         // Create date parser to pass through dates here
         SimpleDateFormat sf = new SimpleDateFormat("dd/mm/yyyy");
+
+        ArrayList<Employee> employees = new ArrayList<>();
+
+        employees.add(new Employee("User", "Name", "Sales", 1, 10000.00));
+        employees.add(new Employee("Admin", "Account", "Admin", 1, 10000.00, true));
 
         ArrayList<Car> cars = new ArrayList<>();
         // String bodyStyle, String make, String model, String colour, String reg, double price, int numberOfMiles, Date manufacturingDate
         cars.add(new Car("Hatchback","Ford","Fusion","Red","RD15 TVC",5000,50000,sf.parse("10/10/2010")));
         cars.add(new Car("Hatchback","Vauxhaul","Corsa","Silver","TS92 GHB",2000,200000,new Date(1)));
+
+        /** End creation of example data */
 
 
         title = "Car Sales";
@@ -48,6 +61,7 @@ public class MainFrame {
         frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(),BoxLayout.PAGE_AXIS));
         frame.setVisible(true);
 
+        // Construct starting menu
         Menu menu = new Menu(title, new String[] {
                 "Car search",
                 "some other page",
@@ -55,6 +69,7 @@ public class MainFrame {
                 "some other page"
         });
 
+        // These lambda functions link the whole app together and define what pages link to other pages
         listeners = new ActionListener[]{
                 actionEvent -> {
                     out.print("search");
@@ -64,6 +79,7 @@ public class MainFrame {
                                 out.print("view car");
                             }
                     };
+                    // Always update the frame after redefining links
                     updateFrame(search);
                 },
                 actionEvent -> {
@@ -76,20 +92,8 @@ public class MainFrame {
                     out.print("4");
                 }
         };
-
-        menu.buttons[0].addActionListener(actionEvent -> {
-        });
-        menu.buttons[1].addActionListener(actionEvent -> {
-            out.print("yeh");
-        });
-        menu.buttons[2].addActionListener(actionEvent -> out.print("yeh"));
-        menu.buttons[3].addActionListener(actionEvent -> out.print("yeh"));
-
+        // Always update the frame after redefining links
         updateFrame(menu);
 
-        ArrayList<Employee> employees = new ArrayList<>();
-
-        employees.add(new Employee("User", "Name", "Sales", 1, 10000.00));
-        employees.add(new Employee("Admin", "Account", "Admin", 1, 10000.00, true));
     }
 }
